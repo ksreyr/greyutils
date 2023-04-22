@@ -1,0 +1,49 @@
+{
+  "name": "utilgrey",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:seed": "prisma db seed"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.0",
+    "@mui/x-date-pickers": "^6.2.1",
+    "@prisma/client": "^4.12.0",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
+    "dayjs": "^1.11.7",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "jsonwebtoken": "^9.0.0",
+    "next": "13.3.0",
+    "next-auth": "^4.22.0",
+    "postcss": "8.4.21",
+    "prisma": "^4.12.0",
+    "react": "18.2.0",
+    "react-apexcharts": "^1.4.0",
+    "react-dom": "18.2.0",
+    "react-pdf": "^6.2.2",
+    "recharts": "^2.5.0",
+    "tailwindcss": "3.3.1",
+    "ts-node": "^10.9.1",
+    "typescript": "5.0.4",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@types/react-pdf": "^6.2.0"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}
