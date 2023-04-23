@@ -44,7 +44,7 @@ export const authOptions = {
             return {...session, ...token};
         },
         async redirect({url, baseUrl}:{url:string, baseUrl:string}) {
-            return baseUrl;
+            return url
         }
     },
     secret:process.env.NEXT_PUBLIC_SECRET,
@@ -53,7 +53,8 @@ export const authOptions = {
     },
     pages: {
         signIn: '/auth/credentials-signin',
-    }
+    },
+    site: process.env.NEXTAUTH_URL
 }
 
 // @ts-ignore
