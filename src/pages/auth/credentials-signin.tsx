@@ -33,13 +33,9 @@ export default function SignIn({ csrfToken }: InferGetServerSidePropsType<typeof
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        await signIn("credentials", {
             email: data.get('email'),
-            password: data.get('password'),
-        });
-        const result = await signIn("credentials", {
-            email: data.get('email'),
-            password: data.get('password'),
+            password: data.get('password')
         });
     };
 

@@ -18,6 +18,7 @@ export const authOptions = {
                 if (!credentials) {
                     return null
                 }
+
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 const user = await userLogin(credentials)
                     .then(res => res.json())
@@ -25,12 +26,14 @@ export const authOptions = {
                         console.log(err)
                         return null
                     })
+
                 const validationJWT = await jwt.verify(
                     user.token,
                     process.env.JWT_SECRET,
                     function(err:any, decoded:any) {
                         return err?{err: 'JWT Error'}:decoded
                 })
+                console.log("token: ",validationJWT.err?null:user)
                 return validationJWT.err?null:user
             }
         })
@@ -44,10 +47,12 @@ export const authOptions = {
             return {...session, ...token};
         },
         async redirect({url, baseUrl}:{url:string, baseUrl:string}) {
-            return url
+            console.log("baseurl ", baseUrl)
+            console.log("url ", url)
+            console.log("ENV URL ", process.env.NEXTAUTH_URL)
+            return process.env.NEXTAUTH_URL;
         }
     },
-    secret:process.env.NEXT_PUBLIC_SECRET,
     session: {
         strategy: "jwt",
     },
