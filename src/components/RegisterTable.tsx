@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,19 +19,21 @@ function preventDefault(event: React.MouseEvent) {
     event.preventDefault();
 }
 
+
 export default function RegisterTable() {
-    const getAllRegister = useGetAllRegisters()
-    const getRegistersByMonth = useGetRegistersByMonth()
+
     const [registers, setRegister] = useState<RegisterModel[]>([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getAllRegister = useCallback(useGetAllRegisters(), []);
+
     useEffect(() => {
         const fetchRegister = async () => {
             const allRegister = await getAllRegister().then(res => res.json())
-            const registerByMonth = await getRegistersByMonth({"month" : "04"}).then(res => res.json())
-            console.log("register by month: ", registerByMonth)
+            console.log("fetched all registers", allRegister)
             setRegister(allRegister)
         }
         fetchRegister();
-    }, [getAllRegister, getRegistersByMonth])
+    }, [getAllRegister])
     return (
         <React.Fragment>
             <Title>Register Orders</Title>

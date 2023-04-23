@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Label, Line, LineChart, ResponsiveContainer, XAxis, YAxis} from 'recharts';
 import Title from '../structur/Title';
 import {useGetAmountGropedByDay} from "@/fetchApi/registerRequest/useGetAmountGropedByDay";
@@ -7,19 +7,22 @@ import {ChartModel} from "../../../prisma/models/ChartModel";
 import {mdTheme} from "@/utils/themen/themeCreator";
 
 
-const useHookChart=(month:string)=>{
+const useHookChart = (month: string) => {
 
     const [registers, setRegisters] = useState<ChartModel[]>([])
 
-    const getAllRegisters = useGetAmountGropedByDay();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getAllRegisters = useCallback(useGetAmountGropedByDay(),[]);
 
     useEffect(() => {
-        const fetchData = fetchingData(getAllRegisters, setRegisters)
-        fetchData(month)}, [getAllRegisters, month])
+            const fetchData = fetchingData(getAllRegisters, setRegisters)
+            console.log("fetching chart data", fetchData)
+            fetchData(month)
+        }, [getAllRegisters, month]
+    )
 
     function fetchingData(getAllRegisters: () => Promise<Response>,
-                         setRegisters: (value: (((prevState: ChartModel[]) => ChartModel[]) | ChartModel[])) => void)
-    {
+                          setRegisters: (value: (((prevState: ChartModel[]) => ChartModel[]) | ChartModel[])) => void) {
         return async (month: string) => {
             const allRegisters = await getAllRegisters();
             const registers = await allRegisters.json() as ChartModel[];
@@ -37,13 +40,14 @@ const useHookChart=(month:string)=>{
             setRegisters(charModel)
         };
     }
-    return{
+
+    return {
         registers
     }
 }
 
 
-export default function Chart({month}:{month:string}) {
+export default function Chart({month}: { month: string }) {
 
     const hookChart = useHookChart(month)
 

@@ -41,7 +41,7 @@ async function hashPassword(plaintextPassword:string) {
 }
 
 async function main() {
-    for (let i = 0; i < 30; i++) {
+    /*for (let i = 0; i < 30; i++) {
         const register = registerMother()
         const registerToSave = await prisma.register.upsert({
             where: {
@@ -51,13 +51,14 @@ async function main() {
             create: register,
         })
         console.log("DB Seeded Register", {...registerToSave});
-    }
-    const password = await hashPassword('admin');
+    }*/
+    const password = await hashPassword('greyutils');
     const userAdmin = await prisma.user.create({
         data: {
             name: 'greyutils',
             email: 'greyutils@gmail.com',
-            password: password
+            password: password,
+            roll: 'admin'
         }
     })
     console.log("DB Seeded Register", {...userAdmin});

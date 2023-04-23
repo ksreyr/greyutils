@@ -27,11 +27,8 @@ export default async function handler(
                 return current.totalSinIva ? current.totalSinIva + prev : prev
             }, 0);
 
-
-            // @ts-ignore
-            const from = sortedArrayGet.at(0).date.toString();
-            // @ts-ignore
-            const until = sortedArrayGet.reverse().at(0).date.toString();
+            const from = sortedArrayGet.at(0)?.date.toString() || '';
+            const until = sortedArrayGet.reverse().at(0)?.date.toString() || '';
 
             return res.status(200)
                 .json( {
@@ -40,6 +37,7 @@ export default async function handler(
                     from: from,
                     until: until
                 })
+        
         case 'POST':
 
             const { sortedArray: sortedArrayPost } = await getSortedRegisterArrray();

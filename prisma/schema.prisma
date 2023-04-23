@@ -15,12 +15,15 @@ model User {
    name String
    email String @unique
    password String
+   roll String
 }
 
 model Register {
    id String @default(cuid()) @id
    totalSinIva Float
    number Int
+   company String
+   user String
    iva Float
    date String
 }

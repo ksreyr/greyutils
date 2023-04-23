@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './structur/Title';
@@ -21,11 +21,13 @@ export default function TotalSellsComponent() {
         until: '',
         totalSells:0
     })
-    const getTotalIva = useGetTotalIva();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getTotalIva = useCallback(useGetTotalIva(),[]);
 
     useEffect(() => {
         const getTotalObject = async () => {
             const totalIva = await getTotalIva().then(res => res.json());
+            console.log("fetched total Iva", totalIva)
             setTotalIvaState(totalIva);
         }
         getTotalObject()

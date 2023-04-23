@@ -40,10 +40,12 @@ export const PdfDownloadComponent = ({setPdf, pdf}: { setPdf: any, pdf: pdfStruc
             date: date
         }
         const toSaveRegister: RegisterModel = {
+            company: "helados",
+            user: "admin",
             iva: parseFloat(conIva.replace(',', '')),
             totalSinIva: parseFloat(totalSinIva.replace(',', '')),
             number: parseInt(filename),
-            date: date,
+            date: date
         }
         await createRegister(toSaveRegister).then(res => res.json())
         setPdf(pdfToSave);
